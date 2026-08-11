@@ -1,7 +1,3 @@
-/* ==========================================
-   VARIABLES DEL JUEGO
-========================================== */
-
 let puntos = 0;
 
 let atrapados = 0;
@@ -20,59 +16,159 @@ let intervaloTiempo = null;
 
 let temporizadorFantasma = null;
 
-
-/* Tiempo que tiene el jugador
-   para atrapar cada fantasma */
-
 let tiempoFantasma = 3000;
 
 
-/* ==========================================
-   CARGAR PÁGINA
-========================================== */
+/* =========================================
+   INICIO
+========================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
-
     function () {
 
-        const fantasma =
-            document.getElementById(
-                "fantasma"
+        document
+            .getElementById("botonJugar")
+            .addEventListener(
+                "click",
+                iniciarJuego
             );
 
 
-        fantasma.addEventListener(
-            "click",
-
-            atraparFantasma
-        );
-
-
-        document.getElementById(
-            "botonJugar"
-        ).addEventListener(
-            "click",
-
-            iniciarJuego
-        );
+        document
+            .getElementById("botonReiniciar")
+            .addEventListener(
+                "click",
+                iniciarJuego
+            );
 
 
-        document.getElementById(
-            "botonReiniciar"
-        ).addEventListener(
-            "click",
+        const escena =
+            document.querySelector(
+                "a-scene"
+            );
 
-            iniciarJuego
+
+        escena.addEventListener(
+            "loaded",
+            function () {
+
+                escena.canvas.addEventListener(
+                    "pointerdown",
+                    detectarFantasma
+                );
+
+            }
         );
 
     }
 );
 
 
-/* ==========================================
-   INICIAR PARTIDA
-========================================== */
+/* =========================================
+   DETECTAR CLICK / TOUCH
+========================================= */
+
+function detectarFantasma(evento) {
+
+    if (
+        !juegoActivo ||
+        !fantasmaActivo ||
+        bloqueado
+    ) {
+        return;
+    }
+
+
+    const escena =
+        document.querySelector(
+            "a-scene"
+        );
+
+
+    const canvas =
+        escena.canvas;
+
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+
+    const mouse =
+        new THREE.Vector2();
+
+
+    mouse.x =
+        (
+            (evento.clientX - rect.left)
+            /
+            rect.width
+        ) * 2 - 1;
+
+
+    mouse.y =
+        -(
+            (
+                evento.clientY - rect.top
+            )
+            /
+            rect.height
+        ) * 2 + 1;
+
+
+    const camara =
+        document
+            .getElementById("camara")
+            .getObject3D("camera");
+
+
+    if (!camara) {
+        return;
+    }
+
+
+    const hitbox =
+        document
+            .getElementById(
+                "hitboxFantasma"
+            )
+            .getObject3D("mesh");
+
+
+    if (!hitbox) {
+        return;
+    }
+
+
+    const raycaster =
+        new THREE.Raycaster();
+
+
+    raycaster.setFromCamera(
+        mouse,
+        camara
+    );
+
+
+    const impactos =
+        raycaster.intersectObject(
+            hitbox,
+            true
+        );
+
+
+    if (impactos.length > 0) {
+
+        atraparFantasma();
+
+    }
+
+}
+
+
+/* =========================================
+   INICIAR JUEGO
+========================================= */
 
 function iniciarJuego() {
 
@@ -87,6 +183,8 @@ function iniciarJuego() {
     tiempoFantasma = 3000;
 
     juegoActivo = true;
+
+    fantasmaActivo = false;
 
     bloqueado = false;
 
@@ -134,16 +232,11 @@ function iniciarJuego() {
     actualizarInterfaz();
 
 
-    /* Aparece el primer fantasma */
-
     aparecerFantasma();
 
 
-    /* Iniciamos cronómetro */
-
     intervaloTiempo =
         setInterval(
-
             function () {
 
                 tiempo--;
@@ -152,67 +245,46 @@ function iniciarJuego() {
                 actualizarInterfaz();
 
 
-                /* Aumentar dificultad */
-
-                if (
-                    tiempo === 45
-                ) {
+                if (tiempo === 45) {
 
                     tiempoFantasma =
                         2500;
 
-                    mostrarMensaje(
-                        "¡Los fantasmas son más rápidos!"
-                    );
                 }
 
 
-                if (
-                    tiempo === 30
-                ) {
+                if (tiempo === 30) {
 
                     tiempoFantasma =
                         2000;
 
-                    mostrarMensaje(
-                        "¡Dificultad aumentada!"
-                    );
                 }
 
 
-                if (
-                    tiempo === 15
-                ) {
+                if (tiempo === 15) {
 
                     tiempoFantasma =
                         1500;
 
-                    mostrarMensaje(
-                        "¡Últimos segundos!"
-                    );
                 }
 
 
-                if (
-                    tiempo <= 0
-                ) {
+                if (tiempo <= 0) {
 
                     terminarJuego();
 
                 }
 
             },
-
             1000
-
         );
 
 }
 
 
-/* ==========================================
-   APARECER FANTASMA
-========================================== */
+/* =========================================
+   APARECER
+========================================= */
 
 function aparecerFantasma() {
 
@@ -236,19 +308,23 @@ function aparecerFantasma() {
     );
 
 
+    fantasma.removeAttribute(
+        "animation__desaparecer"
+    );
+
+
+    fantasma.removeAttribute(
+        "animation__aparecer"
+    );
+
+
     fantasma.setAttribute(
         "scale",
         "0.05 0.05 0.05"
     );
 
 
-    fantasma.removeAttribute(
-        "animation__desaparecer"
-    );
-
-
     fantasma.setAttribute(
-
         "animation__aparecer",
 
         `
@@ -258,7 +334,6 @@ function aparecerFantasma() {
         dur: 300;
         easing: easeOutBack;
         `
-
     );
 
 
@@ -272,27 +347,18 @@ function aparecerFantasma() {
     );
 
 
-    /* Si no lo atrapa a tiempo */
-
     temporizadorFantasma =
         setTimeout(
-
-            function () {
-
-                fantasmaEscapado();
-
-            },
-
+            fantasmaEscapado,
             tiempoFantasma
-
         );
 
 }
 
 
-/* ==========================================
+/* =========================================
    ATRAPAR
-========================================== */
+========================================= */
 
 function atraparFantasma() {
 
@@ -301,9 +367,7 @@ function atraparFantasma() {
         !fantasmaActivo ||
         bloqueado
     ) {
-
         return;
-
     }
 
 
@@ -325,9 +389,10 @@ function atraparFantasma() {
     actualizarInterfaz();
 
 
-    mostrarMensaje(
-        "¡Atrapado! +10"
-    );
+    document.getElementById(
+        "mensaje"
+    ).textContent =
+        "¡Atrapado! +10";
 
 
     const fantasma =
@@ -342,7 +407,6 @@ function atraparFantasma() {
 
 
     fantasma.setAttribute(
-
         "animation__desaparecer",
 
         `
@@ -352,12 +416,10 @@ function atraparFantasma() {
         dur: 220;
         easing: easeInBack;
         `
-
     );
 
 
     setTimeout(
-
         function () {
 
             if (!juegoActivo) {
@@ -371,32 +433,21 @@ function atraparFantasma() {
             );
 
 
-            /* Pequeña pausa */
-
             setTimeout(
-
-                function () {
-
-                    aparecerFantasma();
-
-                },
-
+                aparecerFantasma,
                 250
-
             );
 
         },
-
         230
-
     );
 
 }
 
 
-/* ==========================================
-   FANTASMA ESCAPADO
-========================================== */
+/* =========================================
+   ESCAPAR
+========================================= */
 
 function fantasmaEscapado() {
 
@@ -404,9 +455,7 @@ function fantasmaEscapado() {
         !juegoActivo ||
         !fantasmaActivo
     ) {
-
         return;
-
     }
 
 
@@ -414,35 +463,27 @@ function fantasmaEscapado() {
 
     bloqueado = true;
 
-
     vidas--;
 
 
     actualizarInterfaz();
 
 
-    mostrarMensaje(
-        "¡Se escapó! -1 ❤️"
-    );
+    document.getElementById(
+        "mensaje"
+    ).textContent =
+        "¡Se escapó! -1 ❤️";
 
 
-    const fantasma =
-        document.getElementById(
-            "fantasma"
-        );
-
-
-    fantasma.setAttribute(
+    document.getElementById(
+        "fantasma"
+    ).setAttribute(
         "visible",
         "false"
     );
 
 
-    /* Si no quedan vidas */
-
-    if (
-        vidas <= 0
-    ) {
+    if (vidas <= 0) {
 
         terminarJuego();
 
@@ -452,23 +493,16 @@ function fantasmaEscapado() {
 
 
     setTimeout(
-
-        function () {
-
-            aparecerFantasma();
-
-        },
-
+        aparecerFantasma,
         500
-
     );
 
 }
 
 
-/* ==========================================
-   MOVER FANTASMA
-========================================== */
+/* =========================================
+   MOVER
+========================================= */
 
 function moverFantasma() {
 
@@ -480,39 +514,36 @@ function moverFantasma() {
 
     const x =
         numeroAleatorio(
-            -1.2,
-            1.2
+            -0.85,
+            0.85
         );
 
 
     const y =
         numeroAleatorio(
-            -0.65,
-            0.85
+            -0.40,
+            0.60
         );
 
 
     const z =
         numeroAleatorio(
-            -4,
+            -3.8,
             -2.5
         );
 
 
     fantasma.setAttribute(
-
         "position",
-
         `${x} ${y} ${z}`
-
     );
 
 }
 
 
-/* ==========================================
-   ACTUALIZAR INTERFAZ
-========================================== */
+/* =========================================
+   HUD
+========================================= */
 
 function actualizarInterfaz() {
 
@@ -543,8 +574,7 @@ function actualizarInterfaz() {
         i++
     ) {
 
-        corazones +=
-            "❤️";
+        corazones += "❤️";
 
     }
 
@@ -557,25 +587,9 @@ function actualizarInterfaz() {
 }
 
 
-/* ==========================================
-   MENSAJES
-========================================== */
-
-function mostrarMensaje(
-    texto
-) {
-
-    document.getElementById(
-        "mensaje"
-    ).textContent =
-        texto;
-
-}
-
-
-/* ==========================================
-   TERMINAR JUEGO
-========================================== */
+/* =========================================
+   FINAL
+========================================= */
 
 function terminarJuego() {
 
@@ -587,6 +601,8 @@ function terminarJuego() {
     juegoActivo = false;
 
     fantasmaActivo = false;
+
+    bloqueado = true;
 
 
     clearInterval(
@@ -625,10 +641,6 @@ function terminarJuego() {
         "none";
 
 
-    /* =========================
-       RÉCORD
-    ========================== */
-
     let record =
         Number(
             localStorage.getItem(
@@ -637,12 +649,9 @@ function terminarJuego() {
         ) || 0;
 
 
-    if (
-        puntos > record
-    ) {
+    if (puntos > record) {
 
-        record =
-            puntos;
+        record = puntos;
 
 
         localStorage.setItem(
@@ -652,8 +661,6 @@ function terminarJuego() {
 
     }
 
-
-    /* RESULTADOS */
 
     document.getElementById(
         "puntuacionFinal"
@@ -681,9 +688,9 @@ function terminarJuego() {
 }
 
 
-/* ==========================================
-   NÚMERO ALEATORIO
-========================================== */
+/* =========================================
+   ALEATORIO
+========================================= */
 
 function numeroAleatorio(
     minimo,

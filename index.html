@@ -11,10 +11,8 @@
 
     <title>Ghost Hunt AR</title>
 
-    <!-- A-FRAME -->
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
 
-    <!-- AR.JS -->
     <script src="https://cdn.jsdelivr.net/npm/@ar-js-org/ar.js@3.4.8/aframe/build/aframe-ar.js"></script>
 
     <link rel="stylesheet" href="css/estilos.css">
@@ -22,26 +20,18 @@
 
 <body>
 
-    <!-- ==============================
-         PANTALLA DE INICIO
-    =============================== -->
+    <!-- PANTALLA INICIO -->
 
     <div id="pantallaInicio" class="pantalla">
 
         <div class="tarjeta">
 
-            <div class="fantasmaIcono">
-                
-            </div>
+            <div class="fantasmaIcono"></div>
 
             <h1>GHOST HUNT AR</h1>
 
             <p>
-                ¡Los fantasmas han escapado!
-            </p>
-
-            <p>
-                Atrapa todos los que puedas
+                Atrapa todos los fantasmas que puedas
                 antes de que termine el tiempo.
             </p>
 
@@ -51,12 +41,12 @@
 
                 <span>3 vidas</span>
 
-                <span>+10 puntos</span>
+                <span> Fantasma +10 puntos</span>
 
             </div>
 
             <button id="botonJugar">
-                JUGAR
+                ▶ JUGAR
             </button>
 
         </div>
@@ -64,9 +54,7 @@
     </div>
 
 
-    <!-- ==============================
-         HUD DEL JUEGO
-    =============================== -->
+    <!-- HUD -->
 
     <div id="hud">
 
@@ -85,38 +73,30 @@
     </div>
 
 
-    <!-- CONTADOR DE ATRAPADOS -->
-
     <div id="contadorFantasmas">
-        👻 Atrapados:
+
+        Atrapados:
         <span id="atrapados">0</span>
+
     </div>
 
-
-    <!-- MENSAJES -->
 
     <div id="mensaje">
         ¡Atrapa al fantasma!
     </div>
 
 
-    <!-- ==============================
-         GAME OVER
-    =============================== -->
+    <!-- GAME OVER -->
 
     <div id="pantallaGameOver" class="pantalla">
 
         <div class="tarjeta">
 
-            <div class="fantasmaIcono">
-                👻
-            </div>
+            <div class="fantasmaIcono"></div>
 
             <h1>GAME OVER</h1>
 
-            <p class="textoFinal">
-                Tu puntuación
-            </p>
+            <p>Tu puntuación</p>
 
             <div id="puntuacionFinal">
                 0
@@ -125,6 +105,7 @@
             <div class="estadisticas">
 
                 <div>
+
                     <strong id="fantasmasFinal">
                         0
                     </strong>
@@ -132,9 +113,11 @@
                     <span>
                         Fantasmas atrapados
                     </span>
+
                 </div>
 
                 <div>
+
                     <strong id="recordFinal">
                         0
                     </strong>
@@ -142,6 +125,7 @@
                     <span>
                         Récord
                     </span>
+
                 </div>
 
             </div>
@@ -155,9 +139,7 @@
     </div>
 
 
-    <!-- ==============================
-         ESCENA AR
-    =============================== -->
+    <!-- ESCENA -->
 
     <a-scene
         embedded
@@ -169,12 +151,6 @@
             alpha: true;
         "
 
-        cursor="rayOrigin: mouse"
-
-        raycaster="
-            objects: .fantasma
-        "
-
         arjs="
             sourceType: webcam;
             debugUIEnabled: false;
@@ -182,18 +158,16 @@
     >
 
 
-        <!-- ==========================
-             FANTASMA
-        =========================== -->
+        <!-- FANTASMA -->
 
         <a-entity
             id="fantasma"
-            class="fantasma"
             position="0 0 -3"
             visible="false"
         >
 
-            <!-- MODELO COMPLETO -->
+
+            <!-- MODELO -->
 
             <a-entity
                 id="modeloFantasma"
@@ -220,11 +194,31 @@
             >
 
 
+                <!-- HITBOX -->
+                <!-- Ahora se mueve junto con el fantasma -->
+
+                <a-sphere
+                    id="hitboxFantasma"
+
+                    radius="0.85"
+
+                    material="
+                        color: #FFFFFF;
+                        opacity: 0.001;
+                        transparent: true;
+                        depthWrite: false;
+                    "
+                >
+                </a-sphere>
+
+
                 <!-- CUERPO -->
 
                 <a-sphere
                     position="0 0.05 0"
+
                     radius="0.34"
+
                     scale="1 1.35 0.82"
 
                     material="
@@ -241,7 +235,9 @@
 
                 <a-sphere
                     position="0 0.31 0"
+
                     radius="0.34"
+
                     scale="1 0.90 0.85"
 
                     material="
@@ -264,6 +260,7 @@
                 >
                 </a-sphere>
 
+
                 <a-sphere
                     position="0.115 0.34 0.286"
                     radius="0.057"
@@ -273,7 +270,7 @@
                 </a-sphere>
 
 
-                <!-- BRILLO OJOS -->
+                <!-- BRILLOS -->
 
                 <a-sphere
                     position="-0.128 0.365 0.323"
@@ -281,6 +278,7 @@
                     color="#FFFFFF"
                 >
                 </a-sphere>
+
 
                 <a-sphere
                     position="0.102 0.365 0.323"
@@ -316,6 +314,7 @@
                 >
                 </a-sphere>
 
+
                 <a-sphere
                     position="0.205 0.215 0.272"
                     radius="0.038"
@@ -330,7 +329,7 @@
                 </a-sphere>
 
 
-                <!-- BRAZO IZQUIERDO -->
+                <!-- BRAZO IZQ -->
 
                 <a-sphere
                     position="-0.35 0.03 -0.01"
@@ -346,7 +345,7 @@
                 </a-sphere>
 
 
-                <!-- BRAZO DERECHO -->
+                <!-- BRAZO DER -->
 
                 <a-sphere
                     position="0.35 0.03 -0.01"
@@ -376,6 +375,7 @@
                 >
                 </a-sphere>
 
+
                 <a-sphere
                     position="0 -0.37 0"
                     radius="0.15"
@@ -387,6 +387,7 @@
                     "
                 >
                 </a-sphere>
+
 
                 <a-sphere
                     position="0.18 -0.32 0"
@@ -401,7 +402,7 @@
                 </a-sphere>
 
 
-                <!-- LUZ DEL FANTASMA -->
+                <!-- LUZ -->
 
                 <a-light
                     type="point"
@@ -426,6 +427,7 @@
         >
         </a-light>
 
+
         <a-light
             type="directional"
             color="#FFFFFF"
@@ -438,6 +440,7 @@
         <!-- CÁMARA -->
 
         <a-camera
+            id="camara"
             position="0 0 0"
             look-controls="enabled: false"
         >

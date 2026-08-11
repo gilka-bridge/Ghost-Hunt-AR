@@ -10,6 +10,7 @@ body {
 
 body {
     margin: 0;
+
     overflow: hidden;
 
     font-family:
@@ -18,12 +19,12 @@ body {
         sans-serif;
 
     background: black;
+
+    touch-action: none;
 }
 
 
-/* ================================
-   HUD
-================================ */
+/* HUD */
 
 #hud {
     position: fixed;
@@ -38,6 +39,8 @@ body {
     display: none;
 
     gap: 8px;
+
+    pointer-events: none;
 }
 
 
@@ -54,14 +57,10 @@ body {
     font-size: 14px;
 
     white-space: nowrap;
-
-    backdrop-filter: blur(6px);
 }
 
 
-/* ================================
-   FANTASMAS ATRAPADOS
-================================ */
+/* CONTADOR */
 
 #contadorFantasmas {
     position: fixed;
@@ -83,12 +82,12 @@ body {
     color: white;
 
     font-size: 13px;
+
+    pointer-events: none;
 }
 
 
-/* ================================
-   MENSAJE
-================================ */
+/* MENSAJE */
 
 #mensaje {
     position: fixed;
@@ -102,9 +101,6 @@ body {
 
     display: none;
 
-    width: max-content;
-    max-width: 90%;
-
     padding: 9px 14px;
 
     border-radius: 13px;
@@ -114,28 +110,20 @@ body {
 
     color: white;
 
-    text-align: center;
-
     font-size: 13px;
 
-    backdrop-filter: blur(6px);
+    pointer-events: none;
 }
 
 
-/* ================================
-   PANTALLAS
-================================ */
+/* PANTALLAS */
 
 .pantalla {
     position: fixed;
 
-    top: 0;
-    left: 0;
+    inset: 0;
 
     z-index: 500;
-
-    width: 100%;
-    height: 100%;
 
     display: flex;
 
@@ -151,15 +139,14 @@ body {
 }
 
 
+/* TARJETA */
+
 .tarjeta {
     width: 100%;
+
     max-width: 390px;
 
     padding: 30px 24px;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.15);
 
     border-radius: 25px;
 
@@ -169,27 +156,16 @@ body {
     color: white;
 
     text-align: center;
-
-    box-shadow:
-        0 15px 50px
-        rgba(0, 0, 0, 0.45);
 }
 
 
 .fantasmaIcono {
     font-size: 65px;
-
-    margin-bottom: 5px;
 }
 
 
 .tarjeta h1 {
-    margin:
-        5px
-        0
-        15px;
-
-    font-size: 30px;
+    margin: 5px 0 15px;
 }
 
 
@@ -197,14 +173,10 @@ body {
     color: #DDD5F7;
 
     font-size: 14px;
-
-    line-height: 1.5;
 }
 
 
-/* ================================
-   REGLAS
-================================ */
+/* REGLAS */
 
 .reglas {
     display: flex;
@@ -215,9 +187,7 @@ body {
 
     gap: 7px;
 
-    margin:
-        20px
-        0;
+    margin: 20px 0;
 }
 
 
@@ -233,14 +203,10 @@ body {
 }
 
 
-/* ================================
-   BOTONES
-================================ */
+/* BOTONES */
 
 .tarjeta button {
     width: 100%;
-
-    margin-top: 10px;
 
     padding: 13px;
 
@@ -248,8 +214,7 @@ body {
 
     border-radius: 14px;
 
-    background:
-        #7657E8;
+    background: #7657E8;
 
     color: white;
 
@@ -261,29 +226,10 @@ body {
 }
 
 
-.tarjeta button:hover {
-    background:
-        #8B70F2;
-}
-
-
-.tarjeta button:active {
-    transform:
-        scale(0.97);
-}
-
-
-/* ================================
-   GAME OVER
-================================ */
+/* GAME OVER */
 
 #pantallaGameOver {
     display: none;
-}
-
-
-.textoFinal {
-    margin-bottom: 5px !important;
 }
 
 
@@ -322,8 +268,6 @@ body {
 .estadisticas strong {
     display: block;
 
-    margin-bottom: 4px;
-
     font-size: 22px;
 
     color: #C5B6FF;
@@ -337,21 +281,17 @@ body {
 }
 
 
-/* ================================
-   CANVAS
-================================ */
+/* CANVAS */
 
 .a-canvas {
     position: fixed !important;
 
     top: 0 !important;
     left: 0 !important;
+
+    touch-action: none;
 }
 
-
-/* ================================
-   CELULAR
-================================ */
 
 @media (max-width: 500px) {
 
@@ -361,11 +301,4 @@ body {
         font-size: 12px;
     }
 
-    .tarjeta {
-        padding: 25px 20px;
-    }
-
-    .tarjeta h1 {
-        font-size: 26px;
-    }
 }
