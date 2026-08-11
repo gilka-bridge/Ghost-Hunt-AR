@@ -1,0 +1,371 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: black;
+}
+
+
+/* ================================
+   HUD
+================================ */
+
+#hud {
+    position: fixed;
+
+    top: 15px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 100;
+
+    display: none;
+
+    gap: 8px;
+}
+
+
+.hudItem {
+    padding: 9px 13px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(20, 10, 40, 0.88);
+
+    color: white;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+
+    backdrop-filter: blur(6px);
+}
+
+
+/* ================================
+   FANTASMAS ATRAPADOS
+================================ */
+
+#contadorFantasmas {
+    position: fixed;
+
+    top: 70px;
+    left: 12px;
+
+    z-index: 100;
+
+    display: none;
+
+    padding: 8px 12px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(20, 10, 40, 0.85);
+
+    color: white;
+
+    font-size: 13px;
+}
+
+
+/* ================================
+   MENSAJE
+================================ */
+
+#mensaje {
+    position: fixed;
+
+    bottom: 15px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 100;
+
+    display: none;
+
+    width: max-content;
+    max-width: 90%;
+
+    padding: 9px 14px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(20, 10, 40, 0.85);
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    backdrop-filter: blur(6px);
+}
+
+
+/* ================================
+   PANTALLAS
+================================ */
+
+.pantalla {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    z-index: 500;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background:
+        rgba(5, 2, 15, 0.72);
+
+    backdrop-filter: blur(5px);
+}
+
+
+.tarjeta {
+    width: 100%;
+    max-width: 390px;
+
+    padding: 30px 24px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+    border-radius: 25px;
+
+    background:
+        rgba(24, 12, 48, 0.94);
+
+    color: white;
+
+    text-align: center;
+
+    box-shadow:
+        0 15px 50px
+        rgba(0, 0, 0, 0.45);
+}
+
+
+.fantasmaIcono {
+    font-size: 65px;
+
+    margin-bottom: 5px;
+}
+
+
+.tarjeta h1 {
+    margin:
+        5px
+        0
+        15px;
+
+    font-size: 30px;
+}
+
+
+.tarjeta p {
+    color: #DDD5F7;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* ================================
+   REGLAS
+================================ */
+
+.reglas {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin:
+        20px
+        0;
+}
+
+
+.reglas span {
+    padding: 7px 10px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    font-size: 12px;
+}
+
+
+/* ================================
+   BOTONES
+================================ */
+
+.tarjeta button {
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        #7657E8;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.tarjeta button:hover {
+    background:
+        #8B70F2;
+}
+
+
+.tarjeta button:active {
+    transform:
+        scale(0.97);
+}
+
+
+/* ================================
+   GAME OVER
+================================ */
+
+#pantallaGameOver {
+    display: none;
+}
+
+
+.textoFinal {
+    margin-bottom: 5px !important;
+}
+
+
+#puntuacionFinal {
+    margin-bottom: 20px;
+
+    font-size: 52px;
+
+    font-weight: bold;
+
+    color: #FFD95A;
+}
+
+
+.estadisticas {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+
+.estadisticas div {
+    flex: 1;
+
+    padding: 12px 5px;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255, 255, 255, 0.07);
+}
+
+
+.estadisticas strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 22px;
+
+    color: #C5B6FF;
+}
+
+
+.estadisticas span {
+    font-size: 10px;
+
+    color: #CCC5DC;
+}
+
+
+/* ================================
+   CANVAS
+================================ */
+
+.a-canvas {
+    position: fixed !important;
+
+    top: 0 !important;
+    left: 0 !important;
+}
+
+
+/* ================================
+   CELULAR
+================================ */
+
+@media (max-width: 500px) {
+
+    .hudItem {
+        padding: 8px 9px;
+
+        font-size: 12px;
+    }
+
+    .tarjeta {
+        padding: 25px 20px;
+    }
+
+    .tarjeta h1 {
+        font-size: 26px;
+    }
+}
