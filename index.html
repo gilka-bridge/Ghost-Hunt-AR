@@ -41,7 +41,7 @@
 
                 <span>3 vidas</span>
 
-                <span> Fantasma +10 puntos</span>
+                <span>+10 puntos</span>
 
             </div>
 
@@ -157,267 +157,6 @@
         "
     >
 
-
-        <!-- FANTASMA -->
-
-        <a-entity
-            id="fantasma"
-            position="0 0 -3"
-            visible="false"
-        >
-
-
-            <!-- MODELO -->
-
-            <a-entity
-                id="modeloFantasma"
-
-                animation__flotar="
-                    property: position;
-                    from: 0 -0.08 0;
-                    to: 0 0.08 0;
-                    dir: alternate;
-                    dur: 900;
-                    loop: true;
-                    easing: easeInOutSine;
-                "
-
-                animation__balanceo="
-                    property: rotation;
-                    from: 0 -18 -4;
-                    to: 0 18 4;
-                    dir: alternate;
-                    dur: 1600;
-                    loop: true;
-                    easing: easeInOutSine;
-                "
-            >
-
-
-                <!-- HITBOX -->
-                <!-- Ahora se mueve junto con el fantasma -->
-
-                <a-sphere
-                    id="hitboxFantasma"
-
-                    radius="0.85"
-
-                    material="
-                        color: #FFFFFF;
-                        opacity: 0.001;
-                        transparent: true;
-                        depthWrite: false;
-                    "
-                >
-                </a-sphere>
-
-
-                <!-- CUERPO -->
-
-                <a-sphere
-                    position="0 0.05 0"
-
-                    radius="0.34"
-
-                    scale="1 1.35 0.82"
-
-                    material="
-                        color: #F2EEFF;
-                        roughness: 0.7;
-                        emissive: #715CFF;
-                        emissiveIntensity: 0.08;
-                    "
-                >
-                </a-sphere>
-
-
-                <!-- CABEZA -->
-
-                <a-sphere
-                    position="0 0.31 0"
-
-                    radius="0.34"
-
-                    scale="1 0.90 0.85"
-
-                    material="
-                        color: #F7F4FF;
-                        roughness: 0.65;
-                        emissive: #715CFF;
-                        emissiveIntensity: 0.08;
-                    "
-                >
-                </a-sphere>
-
-
-                <!-- OJOS -->
-
-                <a-sphere
-                    position="-0.115 0.34 0.286"
-                    radius="0.057"
-                    scale="0.75 1.15 0.45"
-                    color="#171126"
-                >
-                </a-sphere>
-
-
-                <a-sphere
-                    position="0.115 0.34 0.286"
-                    radius="0.057"
-                    scale="0.75 1.15 0.45"
-                    color="#171126"
-                >
-                </a-sphere>
-
-
-                <!-- BRILLOS -->
-
-                <a-sphere
-                    position="-0.128 0.365 0.323"
-                    radius="0.014"
-                    color="#FFFFFF"
-                >
-                </a-sphere>
-
-
-                <a-sphere
-                    position="0.102 0.365 0.323"
-                    radius="0.014"
-                    color="#FFFFFF"
-                >
-                </a-sphere>
-
-
-                <!-- BOCA -->
-
-                <a-sphere
-                    position="0 0.205 0.30"
-                    radius="0.045"
-                    scale="0.75 1 0.35"
-                    color="#352944"
-                >
-                </a-sphere>
-
-
-                <!-- MEJILLAS -->
-
-                <a-sphere
-                    position="-0.205 0.215 0.272"
-                    radius="0.038"
-                    scale="1.2 0.5 0.25"
-
-                    material="
-                        color: #FF8FC7;
-                        opacity: 0.6;
-                        transparent: true;
-                    "
-                >
-                </a-sphere>
-
-
-                <a-sphere
-                    position="0.205 0.215 0.272"
-                    radius="0.038"
-                    scale="1.2 0.5 0.25"
-
-                    material="
-                        color: #FF8FC7;
-                        opacity: 0.6;
-                        transparent: true;
-                    "
-                >
-                </a-sphere>
-
-
-                <!-- BRAZO IZQ -->
-
-                <a-sphere
-                    position="-0.35 0.03 -0.01"
-                    radius="0.13"
-                    scale="1.6 0.55 0.60"
-                    rotation="0 0 -30"
-
-                    material="
-                        color: #F2EEFF;
-                        roughness: 0.7;
-                    "
-                >
-                </a-sphere>
-
-
-                <!-- BRAZO DER -->
-
-                <a-sphere
-                    position="0.35 0.03 -0.01"
-                    radius="0.13"
-                    scale="1.6 0.55 0.60"
-                    rotation="0 0 30"
-
-                    material="
-                        color: #F2EEFF;
-                        roughness: 0.7;
-                    "
-                >
-                </a-sphere>
-
-
-                <!-- COLITA -->
-
-                <a-sphere
-                    position="-0.18 -0.32 0"
-                    radius="0.145"
-                    scale="1 1.35 0.75"
-
-                    material="
-                        color: #F2EEFF;
-                        roughness: 0.7;
-                    "
-                >
-                </a-sphere>
-
-
-                <a-sphere
-                    position="0 -0.37 0"
-                    radius="0.15"
-                    scale="1 1.45 0.75"
-
-                    material="
-                        color: #F2EEFF;
-                        roughness: 0.7;
-                    "
-                >
-                </a-sphere>
-
-
-                <a-sphere
-                    position="0.18 -0.32 0"
-                    radius="0.145"
-                    scale="1 1.35 0.75"
-
-                    material="
-                        color: #F2EEFF;
-                        roughness: 0.7;
-                    "
-                >
-                </a-sphere>
-
-
-                <!-- LUZ -->
-
-                <a-light
-                    type="point"
-                    color="#9D8CFF"
-                    intensity="0.4"
-                    distance="2"
-                    position="0 0 0.5"
-                >
-                </a-light>
-
-            </a-entity>
-
-        </a-entity>
-
-
         <!-- ILUMINACIÓN -->
 
         <a-light
@@ -426,7 +165,6 @@
             intensity="0.8"
         >
         </a-light>
-
 
         <a-light
             type="directional"
@@ -441,9 +179,274 @@
 
         <a-camera
             id="camara"
+
             position="0 0 0"
-            look-controls="enabled: false"
+
+            look-controls="
+                enabled: true;
+                magicWindowTrackingEnabled: true;
+                touchEnabled: false;
+                mouseEnabled: false;
+            "
         >
+
+
+            <!-- ===================================
+                 FANTASMA
+                 Ahora está DENTRO de la cámara
+            ==================================== -->
+
+            <a-entity
+                id="fantasma"
+                position="0 0 -3"
+                visible="false"
+            >
+
+
+                <a-entity
+                    id="modeloFantasma"
+
+                    animation__flotar="
+                        property: position;
+                        from: 0 -0.08 0;
+                        to: 0 0.08 0;
+                        dir: alternate;
+                        dur: 900;
+                        loop: true;
+                        easing: easeInOutSine;
+                    "
+
+                    animation__balanceo="
+                        property: rotation;
+                        from: 0 -18 -4;
+                        to: 0 18 4;
+                        dir: alternate;
+                        dur: 1600;
+                        loop: true;
+                        easing: easeInOutSine;
+                    "
+                >
+
+
+                    <!-- HITBOX -->
+
+                    <a-sphere
+                        id="hitboxFantasma"
+
+                        radius="0.85"
+
+                        material="
+                            color: #FFFFFF;
+                            opacity: 0.001;
+                            transparent: true;
+                            depthWrite: false;
+                        "
+                    >
+                    </a-sphere>
+
+
+                    <!-- CUERPO -->
+
+                    <a-sphere
+                        position="0 0.05 0"
+
+                        radius="0.34"
+
+                        scale="1 1.35 0.82"
+
+                        material="
+                            color: #F2EEFF;
+                            roughness: 0.7;
+                            emissive: #715CFF;
+                            emissiveIntensity: 0.08;
+                        "
+                    >
+                    </a-sphere>
+
+
+                    <!-- CABEZA -->
+
+                    <a-sphere
+                        position="0 0.31 0"
+
+                        radius="0.34"
+
+                        scale="1 0.90 0.85"
+
+                        material="
+                            color: #F7F4FF;
+                            roughness: 0.65;
+                            emissive: #715CFF;
+                            emissiveIntensity: 0.08;
+                        "
+                    >
+                    </a-sphere>
+
+
+                    <!-- OJOS -->
+
+                    <a-sphere
+                        position="-0.115 0.34 0.286"
+                        radius="0.057"
+                        scale="0.75 1.15 0.45"
+                        color="#171126"
+                    >
+                    </a-sphere>
+
+                    <a-sphere
+                        position="0.115 0.34 0.286"
+                        radius="0.057"
+                        scale="0.75 1.15 0.45"
+                        color="#171126"
+                    >
+                    </a-sphere>
+
+
+                    <!-- BRILLOS -->
+
+                    <a-sphere
+                        position="-0.128 0.365 0.323"
+                        radius="0.014"
+                        color="#FFFFFF"
+                    >
+                    </a-sphere>
+
+                    <a-sphere
+                        position="0.102 0.365 0.323"
+                        radius="0.014"
+                        color="#FFFFFF"
+                    >
+                    </a-sphere>
+
+
+                    <!-- BOCA -->
+
+                    <a-sphere
+                        position="0 0.205 0.30"
+                        radius="0.045"
+                        scale="0.75 1 0.35"
+                        color="#352944"
+                    >
+                    </a-sphere>
+
+
+                    <!-- MEJILLAS -->
+
+                    <a-sphere
+                        position="-0.205 0.215 0.272"
+                        radius="0.038"
+                        scale="1.2 0.5 0.25"
+
+                        material="
+                            color: #FF8FC7;
+                            opacity: 0.6;
+                            transparent: true;
+                        "
+                    >
+                    </a-sphere>
+
+                    <a-sphere
+                        position="0.205 0.215 0.272"
+                        radius="0.038"
+                        scale="1.2 0.5 0.25"
+
+                        material="
+                            color: #FF8FC7;
+                            opacity: 0.6;
+                            transparent: true;
+                        "
+                    >
+                    </a-sphere>
+
+
+                    <!-- BRAZO IZQUIERDO -->
+
+                    <a-sphere
+                        position="-0.35 0.03 -0.01"
+                        radius="0.13"
+                        scale="1.6 0.55 0.60"
+                        rotation="0 0 -30"
+
+                        material="
+                            color: #F2EEFF;
+                            roughness: 0.7;
+                        "
+                    >
+                    </a-sphere>
+
+
+                    <!-- BRAZO DERECHO -->
+
+                    <a-sphere
+                        position="0.35 0.03 -0.01"
+                        radius="0.13"
+                        scale="1.6 0.55 0.60"
+                        rotation="0 0 30"
+
+                        material="
+                            color: #F2EEFF;
+                            roughness: 0.7;
+                        "
+                    >
+                    </a-sphere>
+
+
+                    <!-- COLITA -->
+
+                    <a-sphere
+                        position="-0.18 -0.32 0"
+                        radius="0.145"
+                        scale="1 1.35 0.75"
+
+                        material="
+                            color: #F2EEFF;
+                            roughness: 0.7;
+                        "
+                    >
+                    </a-sphere>
+
+                    <a-sphere
+                        position="0 -0.37 0"
+                        radius="0.15"
+                        scale="1 1.45 0.75"
+
+                        material="
+                            color: #F2EEFF;
+                            roughness: 0.7;
+                        "
+                    >
+                    </a-sphere>
+
+                    <a-sphere
+                        position="0.18 -0.32 0"
+                        radius="0.145"
+                        scale="1 1.35 0.75"
+
+                        material="
+                            color: #F2EEFF;
+                            roughness: 0.7;
+                        "
+                    >
+                    </a-sphere>
+
+
+                    <!-- LUZ -->
+
+                    <a-light
+                        type="point"
+                        color="#9D8CFF"
+                        intensity="0.4"
+                        distance="2"
+                        position="0 0 0.5"
+                    >
+                    </a-light>
+
+
+                </a-entity>
+
+            </a-entity>
+
+
         </a-camera>
 
     </a-scene>
